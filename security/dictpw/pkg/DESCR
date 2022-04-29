@@ -1,0 +1,3 @@
+Dictpw randomly picks 5 words off a 7776-word dictionary and prints them with a
+dot between each word. This is the Diceware method of password generation from
+the command line.

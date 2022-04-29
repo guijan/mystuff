@@ -1,0 +1,25 @@
++-----------------------------------------------------------------------
+| Running ${PKGSTEM} on OpenBSD
++-----------------------------------------------------------------------
+
+To play SpaceCadetPinball, you need the original game data from
+3D Pinball for Windows - Space Cadet. The game was included with
+Microsoft Windows versions 95 through XP.
+
+It's possible to extract the data from a Microsoft Windows XP install CD
+by following the steps below:
+
+1. Mount the Windows XP CD (assumed to be on /dev/cd0a).
+# mount /dev/cd0a /mnt
+
+2. Install archivers/cabextract.
+# pkg_add cabextract
+
+3. Extract the game files.
+# cabextract -d /usr/local/share/SpaceCadetPinball \
+    /mnt/I386/{FONT.da_,PINBALL.*,SOUND*.*,TABLE.BM_}
+
+4. Uppercase the game files.
+# for file in ${LOCALBASE}/share/SpaceCadetPinball/*; \
+    do out="$(printf '%s' "${file##*/}" | tr 'a-z' 'A-Z')"; \
+    mv "$file" ${LOCALBASE}/share/SpaceCadetPinball/"$out"; done
